@@ -1,38 +1,207 @@
-.App {
-  text-align: center;
+/* ------------------------------------------------------------------- */
+/* 1. Global Styles and Typography (الأنماط العامة والخطوط) */
+/* ------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #4CAF50;
+  /* أخضر - للزرار والإبراز */
+  --secondary-color: #388E3C;
+  /* أخضر داكن */
+  --background-color: #f7f9fc;
+  /* خلفية فاتحة */
+  --card-background: #ffffff;
+  /* خلفية البطاقة */
+  --text-color: #333;
+  --completed-color: #b0bec5;
+  /* رمادي للفاتح للمكتمل */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: 'Tajawal', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* تغيير إلى أعلى الشاشة */
   min-height: 100vh;
+}
+
+/* ------------------------------------------------------------------- */
+/* 2. Main App Container (حاوية التطبيق الرئيسية) */
+/* ------------------------------------------------------------------- */
+.App {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  margin-top: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  background-color: var(--card-background);
+  border-radius: 12px;
+}
+
+h1 {
+  text-align: center;
+  color: var(--secondary-color);
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+/* ------------------------------------------------------------------- */
+/* 3. Form for Adding New Todos (نموذج إضافة المهام) */
+/* ------------------------------------------------------------------- */
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.todo-form input[type="text"] {
+  flex-grow: 1;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.todo-form input[type="text"]:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.todo-form button {
+  padding: 12px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.todo-form button:hover {
+  background-color: var(--secondary-color);
+}
+
+.todo-form button:active {
+  transform: scale(0.98);
+}
+
+/* ------------------------------------------------------------------- */
+/* 4. Todo List Items (عناصر قائمة المهام) */
+/* ------------------------------------------------------------------- */
+.todo-list {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 15px;
+  background-color: #f0f4f7;
+  border-radius: 8px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  border-right: 5px solid var(--primary-color);
+  /* شريط جانبي يبرز العنصر */
+}
+
+.todo-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.todo-text {
+  flex-grow: 1;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-right: 15px;
+}
+
+/* حالة المكتملة (Completed State) */
+.todo-item.completed {
+  background-color: #e8eaf6;
+  border-right-color: var(--completed-color);
+  color: var(--completed-color);
+}
+
+.todo-item.completed .todo-text {
+  font-style: italic;
+  text-decoration: line-through;
+}
+
+/* زر الحذف */
+.delete-btn {
+  background-color: #f44336;
+  /* أحمر */
   color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.85rem;
 }
 
-.App-link {
-  color: #61dafb;
+.delete-btn:hover {
+  background-color: #d32f2f;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* رسالة عدم وجود مهام */
+.todo-list>p {
+  text-align: center;
+  color: #607d8b;
+  padding: 20px;
+  border: 1px dashed #cfd8dc;
+  border-radius: 8px;
+}
+
+/* ------------------------------------------------------------------- */
+/* 5. Responsive Design (استجابة الشاشة الصغيرة) */
+/* ------------------------------------------------------------------- */
+@media (max-width: 650px) {
+  .App {
+    margin-top: 20px;
+    padding: 15px;
+    box-shadow: none;
+    /* إزالة الظل على الشاشات الصغيرة */
   }
-  to {
-    transform: rotate(360deg);
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .todo-form {
+    flex-direction: column;
+  }
+
+  .todo-form button {
+    width: 100%;
+  }
+
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px 10px;
+  }
+
+  .todo-text {
+    margin-right: 0;
+    margin-bottom: 5px;
+    word-break: break-word;
+    /* لكسر الكلمات الطويلة */
+  }
+
+  .delete-btn {
+    align-self: flex-end;
+    /* وضع زر الحذف على اليمين بالأسفل */
   }
 }
