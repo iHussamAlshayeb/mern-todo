@@ -1,9 +1,12 @@
-import express from "express";
+// routes/todo.js
+const express = require("express");
 const router = express.Router();
+const todoController = require("../controllers/todoController");
 
-router.post("/api/todos", (req, res) => {});
-router.get("/api/todos", (req, res) => {});
-router.put("/api/todos/:id", (req, res) => {});
-router.delete("/api/todos/:id", (req, res) => {});
+// المسارات الأربعة لعمليات CRUD
+router.get("/", todoController.getTodos); // READ all
+router.post("/", todoController.createTodo); // CREATE
+router.put("/:id", todoController.updateTodo); // UPDATE (Toggle)
+router.delete("/:id", todoController.deleteTodo); // DELETE
 
-export default router;
+module.exports = router;
